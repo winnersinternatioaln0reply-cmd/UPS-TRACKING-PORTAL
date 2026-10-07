@@ -1,0 +1,12 @@
+const S=SHIPMENT;
+document.getElementById('trackNum').textContent=S.tracking;
+document.getElementById('service').textContent=S.service;
+document.getElementById('latest').textContent=S.latest;
+document.getElementById('eta').textContent=S.eta;
+document.getElementById('progBar').style.width=S.progress+'%';
+document.getElementById('progText').textContent=S.progress+'% of delivery route completed';
+const dl=(id,obj)=>{document.getElementById(id).innerHTML=Object.entries(obj).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');};
+dl('shipInfo',S.ship);dl('pkgInfo',S.pkg);
+document.getElementById('timeline').innerHTML=[...S.events].reverse().map(e=>`<li><div class="t-time">${e.t}</div><strong>${e.s}</strong><div class="sub">${e.d}</div></li>`).join('');
+const p=document.getElementById('route'),L=p.getTotalLength(),m=document.getElementById('marker'),pt=p.getPointAtLength(L*S.progress/100);
+m.setAttribute('transform',`translate(${pt.x},${pt.y})`);
