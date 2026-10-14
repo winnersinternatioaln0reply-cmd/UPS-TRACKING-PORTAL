@@ -1,6 +1,22 @@
 (function () {
   const mapNode = document.getElementById('interactive-route-map');
-  if (!mapNode || !window.L) return;
+  if (!mapNode) return;
+  if (!window.L) {
+    const statusNode = document.getElementById("route-map-status");
+    if (statusNode) statusNode.textContent = "Loading map library…";
+    const fallback = document.createElement("script");
+    fallback.src = "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js";
+    fallback.onload = function () {
+      const retry = document.createElement("script");
+      retry.src = "js/map.js?retry=" + Date.now();
+      document.body.appendChild(retry);
+    };
+    fallback.onerror = function () {
+      if (statusNode) statusNode.textContent = "Map library unavailable. Check your internet connection and reload.";
+    };
+    document.head.appendChild(fallback);
+    return;
+  }
 
   const status = document.getElementById('route-map-status');
   const addressInput = document.getElementById('route-map-address');
