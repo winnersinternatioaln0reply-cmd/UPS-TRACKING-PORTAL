@@ -1,0 +1,6 @@
+#interactive-route-map{height:430px;min-height:320px;border-radius:8px;z-index:1}
+.map-controls{display:grid;grid-template-columns:1fr auto;gap:8px;margin:10px 0}
+.map-controls input{min-width:0}
+.map-controls button{padding:10px 14px;border:0;border-radius:7px;background:#351C15;color:white;font-weight:700}
+.map-status{font-size:.9rem;margin:.6rem 0;color:#55443a;overflow-wrap:anywhere}
+@media(max-width:480px){#interactive-route-map{height:350px}.map-controls{grid-template-columns:1fr}.map-controls button{width:100%}}
